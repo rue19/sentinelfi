@@ -1,26 +1,148 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@plugin "tailwindcss-animate";
 
-@theme inline {
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-mono: var(--font-mono);
+  --font-sans: var(--font-sans);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
 }
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Standard shadcn/ui variables mapped to SentinelFi palette */
+    --background: #0A0A0B;
+    --foreground: #F2F2F0;
+
+    --card: #111113;
+    --card-foreground: #F2F2F0;
+
+    --popover: #111113;
+    --popover-foreground: #F2F2F0;
+
+    --primary: #6366F1;
+    --primary-foreground: #F2F2F0;
+
+    --secondary: #1F1F24;
+    --secondary-foreground: #F2F2F0;
+
+    --muted: #1A1A1D;
+    --muted-foreground: #8A8A96;
+
+    --accent: #6366F1;
+    --accent-foreground: #F2F2F0;
+
+    --destructive: #EF4444;
+    --destructive-foreground: #F2F2F0;
+
+    --border: #1F1F24;
+    --input: #1E1E22;
+    --ring: #6366F1;
+
+    --radius: 0.5rem;
+
+    /* SentinelFi Custom variables */
+    --bg-base: #0A0A0B;
+    --bg-surface: #111113;
+    --bg-elevated: #1A1A1D;
+    --bg-input: #1E1E22;
+
+    --border-subtle: #1F1F24;
+    --border-default: #2A2A30;
+    --border-strong: #3A3A42;
+
+    --text-primary: #F2F2F0;
+    --text-secondary: #8A8A96;
+    --text-tertiary: #5A5A66;
+
+    --health-safe: #22C55E;
+    --health-safe-bg: #052012;
+    --health-warning: #F59E0B;
+    --health-warning-bg: #1C1200;
+    --health-danger: #EF4444;
+    --health-danger-bg: #1C0202;
+    --health-critical: #DC2626;
+    --health-critical-bg: #1C0202;
+
+    --pnl-positive: #22C55E;
+    --pnl-negative: #EF4444;
+
+    --chart-1: #6366F1;
+    --chart-2: #22C55E;
+    --chart-3: #F59E0B;
+    --chart-4: #EF4444;
+    --chart-5: #8A8A96;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.85);
+  }
+}
+
+.animate-pulse-dot {
+  animation: pulse 2s infinite;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
 }
